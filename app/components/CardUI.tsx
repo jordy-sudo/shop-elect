@@ -3,25 +3,21 @@ import { Card, CardFooter, Image, CardBody, useDisclosure } from '@nextui-org/re
 import ProductModal from './ProductModal';
 import { ProductInfo } from '@/interfaces/ProductInfoInterface';
 
-interface CardUIProps {
-  imageUrl: string;
-  description: string;
-  price: number;
-  titulo: string;
-}
 
-const CardUI: React.FC<CardUIProps> = ({ imageUrl, description, price, titulo }) => {
+
+const CardUI: React.FC<ProductInfo> = ({ imageUrl, description, price, title, moredescription, id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedProduct, setSelectedProduct] = useState<ProductInfo | null>(null);
 
   // Función para abrir el modal con información específica
   const openModal = () => {
     const product: ProductInfo = {
-        title: 'Product Title 1',
-        description: 'Product Description',
-        price: 50,
-        imageUrl: 'path/to/image.jpg',
-        moredescription:'Mas descripcion',
+        id:id,
+        title: title,
+        description: description,
+        price: price,
+        imageUrl: imageUrl,
+        moredescription:moredescription,
         // Add other properties as needed
       };
     setSelectedProduct(product);
@@ -54,11 +50,12 @@ const CardUI: React.FC<CardUIProps> = ({ imageUrl, description, price, titulo })
         </CardBody>
         <CardFooter className="text-small flex flex-col items-start justify-between h-full">
           <div>
-            <b>{titulo}</b>
+            <b>{title}</b>
             <p className="text-xs text-gray-500">{description}</p>
           </div>
           <div className="flex items-center mt-2">
-            <p className="text-default-900">${price}</p>
+            <p className="text-default-500 line-through mr-2">$546545</p>
+            <p className="text-default-900 ml-8">${price}</p>
           </div>
         </CardFooter>
       </Card>
